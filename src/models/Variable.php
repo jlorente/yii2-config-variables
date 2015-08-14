@@ -176,11 +176,11 @@ class Variable extends ActiveRecord {
             throw new InvalidParamException('$config must be a string');
         }
         if (isset(static::$cached[$config]) === false) {
-            $c = static::findOne(['slug' => $config]);
+            $c = static::findOne(['code' => $config]);
             if ($c === null) {
                 throw new InvalidParamException('Configuration not found');
             }
-            static::$cached[$config] = unserialize($c);
+            static::$cached[$config] = $c;
         }
         return static::$cached[$config];
     }
