@@ -16,9 +16,9 @@ use yii\helpers\Html;
 $types = Variable::getTypes();
 $valueFunc = function($model) {
     switch ($model->type) {
-        case Variable::TYPE_ARRAY:
-            $v = Html::encode(implode(', ', $model->value));
-            break;
+        /* case Variable::TYPE_ARRAY:
+          $v = Html::encode(implode(', ', $model->value));
+          break; */
         case Variable::TYPE_OBJECT:
             $v = '';
             foreach ($model->value as $c => $value) {

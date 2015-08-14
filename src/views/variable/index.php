@@ -42,9 +42,9 @@ $this->title = Yii::t('jlorente/config', 'Config Variables')
                 'attribute' => 'value',
                 'value' => function($model) {
                     switch ($model->type) {
-                        case Variable::TYPE_ARRAY:
+                        /*case Variable::TYPE_ARRAY:
                             $v = implode(', ', $model->value);
-                            break;
+                            break;*/
                         case Variable::TYPE_OBJECT:
                             $v = 'object';
                             break;
