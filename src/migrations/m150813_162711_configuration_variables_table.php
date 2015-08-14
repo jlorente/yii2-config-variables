@@ -7,7 +7,7 @@
  * @version     1.0
  */
 use yii\db\Schema;
-use custom\db\Migration;
+use yii\db\Migration;
 use jlorente\config\models\Variable;
 
 /**
@@ -21,7 +21,19 @@ class m150813_162711_configuration_variables_table extends Migration {
      * @inheritdoc
      */
     public function up() {
-        $this->createTable($this->getTableName(), $this->getFields());
+        $this->createTable($this->getTableName(), [
+            'id' => Schema::TYPE_PK,
+            'code' => Schema::TYPE_STRING . ' NOT NULL',
+            'name' => Schema::TYPE_STRING . ' NOT NULL',
+            'description' => Schema::TYPE_TEXT,
+            'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
+            'value' => Schema::TYPE_BINARY,
+            'created_at' => Schema::TYPE_INTEGER,
+            'updated_at' => Schema::TYPE_INTEGER,
+            'updated_by' => Schema::TYPE_INTEGER
+        ]);
+
+        $this->createIndex('UNIQUE_code', $this->getTableName(), 'code', true);
     }
 
     /**
@@ -39,27 +51,6 @@ class m150813_162711_configuration_variables_table extends Migration {
      */
     protected function getTableName() {
         return Variable::tableName();
-    }
-
-    /**
-     * Returns the fields that compose the Variable model table. You can 
-     * override this method to provide additional fields. Make sure to use 
-     * a merge function with the parent::getFields() method to add new fields.
-     * 
-     * @return array Fields that should be created in the table.
-     */
-    protected function getFields() {
-        return [
-            'id' => Schema::TYPE_PK,
-            'code' => Schema::TYPE_STRING . ' NOT NULL',
-            'name' => Schema::TYPE_STRING . ' NOT NULL',
-            'description' => Schema::TYPE_TEXT,
-            'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'value' => Schema::TYPE_BINARY,
-            'created_at' => Schema::TYPE_INTEGER,
-            'updated_at' => Schema::TYPE_INTEGER,
-            'updated_by' => Schema::TYPE_INTEGER
-        ];
     }
 
 }

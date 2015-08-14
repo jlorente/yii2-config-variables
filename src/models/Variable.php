@@ -23,6 +23,7 @@ use yii\behaviors\TimestampBehavior,
  * @author José Lorente <jose.lorente.martin@gmail.com>
  */
 class Variable extends ActiveRecord {
+    /* Variable Types */
 
     const TYPE_INT = 1;
     const TYPE_FLOAT = 2;
@@ -171,7 +172,7 @@ class Variable extends ActiveRecord {
      * @return mixed
      * @throws InvalidParamException
      */
-    public static function get($config) {
+    public static function value($config) {
         if (is_string($config) === false) {
             throw new InvalidParamException('$config must be a string');
         }
@@ -180,7 +181,7 @@ class Variable extends ActiveRecord {
             if ($c === null) {
                 throw new InvalidParamException('Configuration not found');
             }
-            static::$cached[$config] = $c;
+            static::$cached[$config] = $c->value;
         }
         return static::$cached[$config];
     }
