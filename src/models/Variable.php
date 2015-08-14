@@ -12,6 +12,8 @@ namespace jlorente\config\models;
 use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
 use Yii;
+use yii\behaviors\TimestampBehavior,
+    yii\behaviors\BlameableBehavior;
 
 /**
  * Model class for the configuration variable table. Call the static method 
@@ -55,7 +57,7 @@ class Variable extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['type', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['type', 'created_at', 'updated_at', 'updated_by'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
             ['description', 'string'],
             ['code', 'unique'],
@@ -76,6 +78,16 @@ class Variable extends ActiveRecord {
             'type' => Yii::t('jlorente/config', 'Type'),
             'value' => Yii::t('jlorente/config', 'Value')
         ];
+    }
+
+    public function behaviors() {
+        return array_merge(parent::behaviors(), [
+            TimestampBehavior::className(),
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => false
+            ]
+        ]);
     }
 
     /**

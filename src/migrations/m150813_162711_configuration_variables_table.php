@@ -58,7 +58,10 @@ class m150813_162711_configuration_variables_table extends Migration {
             'name' => Schema::TYPE_STRING . ' NOT NULL',
             'description' => Schema::TYPE_TEXT,
             'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'value' => Schema::TYPE_BINARY
+            'value' => Schema::TYPE_BINARY,
+            'created_at' => Schema::TYPE_INTEGER,
+            'updated_at' => Schema::TYPE_INTEGER,
+            'updated_by' => Schema::TYPE_INTEGER
         ];
     }
 
