@@ -30,7 +30,7 @@ class Module extends BaseModule {
         parent::init();
 
         $this->setAliases([
-            '@jlorenteConfig' => '@vendor/jlorente/yii2-config-variables',
+            '@jlorenteConfig' => '@vendor/jlorente/yii2-config-variables/src',
         ]);
     }
 
