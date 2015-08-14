@@ -1,0 +1,22 @@
+{
+    "name": "jlorente/yii2-config-variables",
+    "description": "A Yii2 Module to handle application configuration via database. Allows to modify variables content without tedious production deployments.",
+    "keywords": ["yii2", "config", "configuration", "variable", "database", "modify", "parameter", "param"],
+    "homepage": "https://github.com/jlorente/yii2-config-variables",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Lorente Martin",
+            "email": "jose.lorente.martin@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "jlorente\\config\\": "src/"
+        }
+    }
+}
