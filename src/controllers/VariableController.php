@@ -34,26 +34,13 @@ class VariableController extends Controller {
     }
 
     /**
-     * Renders the create form and create a Variable model.
-     * 
-     * @return type
-     */
-    public function actionCreate() {
-        $model = $this->getModel();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['read', 'id' => $model->primaryKey()]);
-        }
-        return $this->render('create', ['model' => $model]);
-    }
-
-    /**
      * Renders the view of a Variable model.
      * 
      * @param type $id
      * @return \yii\web\Response
      */
-    public function actionRead($id) {
-        return $this->render('create', ['model' => $this->getModel($id)]);
+    public function actionView($id) {
+        return $this->render('view', ['model' => $this->getModel($id)]);
     }
 
     /**
@@ -65,25 +52,9 @@ class VariableController extends Controller {
     public function actionUpdate($id) {
         $model = $this->getModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['read', 'id' => $id]);
+            return $this->redirect(['view', 'id' => $id]);
         }
-        return $this->render('create');
-    }
-
-    /**
-     * Deletes a Variable model.
-     * 
-     * @param int $id
-     * @return \yii\web\Response
-     */
-    public function actionDelete($id) {
-        $model = $this->getModel($id);
-        if ($model->delete()) {
-            Yii::$app->session->setFlash('success', Yii::t('jlorente/config', 'Model with id [' . $id . '] deleted.'));
-        } else {
-            Yii::$app->session->setFlash('error', Yii::t('jlorente/config', 'Unable to delete model with id [' . $id . '].'));
-        }
-        return $this->redirect(['index']);
+        return $this->render('update', ['model' => $model]);
     }
 
     /**

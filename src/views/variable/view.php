@@ -7,32 +7,60 @@
  * @version     1.0
  */
 use yii\widgets\DetailView;
-use custom\helpers\Html;
-use backend\modules\core\models\Promo;
+use jlorente\config\models\Variable;
+use yii\helpers\Html;
 
-/* @var $model jlorente\config\models\Variable */
+/* @var $model jlorente\config\models\VariableForm */
 /* @var $this yii\web\View */
 
+$types = Variable::getTypes();
+$valueFunc = function($model) {
+    switch ($model->type) {
+        case Variable::TYPE_ARRAY:
+            $v = Html::encode(implode(', ', $model->value));
+            break;
+        case Variable::TYPE_OBJECT:
+            $v = '';
+            foreach ($model->value as $c => $value) {
+                $c = Html::encode($c);
+                $value = Html::encode($value);
+                $v .= "<p>$c => $value</p>";
+            }
+            break;
+        default:
+            $v = Html::encode($model->value);
+            break;
+    }
+    return $v;
+};
 echo DetailView::widget([
     'model' => $model,
     'attributes' => [
         'id',
-        'slug',
-        'title',
-        'content',
-        'url',
-        'image',
+        'code',
+        'name',
+        'description',
         [
-            'attribute' => 'file',
-            'format' => 'html',
-            'value' => Html::img(Yii::$app->params['frontendUrl'] . $model->image, [
-                'width' => Promo::IMAGE_WIDTH,
-                'height' => Promo::IMAGE_HEIGHT
-            ])
+            'attribute' => 'type',
+            'value' => $types[$model->type]
         ],
-        'created_at:datetime',
-        'created_by',
-        'updated_at:datetime',
-        'updated_by'
+        [
+            'attribute' => 'value',
+            'format' => 'raw',
+            'value' => $valueFunc($model)
+        ]
     ]
 ]);
+?>
+<div class="col-xs-12 buttons">
+    <?=
+    Html::a(
+            Yii::t('jlorente/config', 'Return to list'), ['index'], ['class' => 'btn btn-success']
+    )
+    ?>
+    <?=
+    Html::a(
+            Yii::t('jlorente/config', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']
+    )
+    ?>
+</div>

@@ -12,21 +12,15 @@ use yii\grid\ActionColumn;
 use yii\data\ActiveDataProvider;
 use jlorente\config\models\Variable;
 
-$this->title = Yii::t('jlorente/config', 'Variables')
+$this->title = Yii::t('jlorente/config', 'Config Variables')
+
 /* @var $model jlorente\config\models\Variable */
 /* @var $this yii\web\View */
 ?>
 <div class="config-var-container">
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?=
-        Html::a(Yii::t('jlorente/config', 'Create Variable'), ['create'], [
-            'class' => 'btn btn-warning'
-        ])
-        ?>
-    </p>
-
     <?php
+    $types = Variable::getTypes();
     echo GridView::widget([
         'dataProvider' => new ActiveDataProvider([
             'query' => Variable::find(),
@@ -37,10 +31,33 @@ $this->title = Yii::t('jlorente/config', 'Variables')
         'columns' => [
             'id',
             'code',
-            'type',
-            'value',
+            'name',
+            [
+                'attribute' => 'type',
+                'value' => function($model) use ($types) {
+                    return $types[$model->type];
+                }
+            ],
+            [
+                'attribute' => 'value',
+                'value' => function($model) {
+                    switch ($model->type) {
+                        case Variable::TYPE_ARRAY:
+                            $v = implode(', ', $model->value);
+                            break;
+                        case Variable::TYPE_OBJECT:
+                            $v = 'object';
+                            break;
+                        default:
+                            $v = $model->value;
+                            break;
+                    }
+                    return $v;
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
+                'template' => '{view} {update}'
             ],
         ]
     ]);

@@ -6,6 +6,7 @@
  * @copyright   José Lorente
  * @version     1.0
  */
+
 namespace jlorente\config\migrations;
 
 use yii\db\Schema;
@@ -53,8 +54,10 @@ class m150813_162711_configuration_variables_table extends Migration {
     protected function getFields() {
         return [
             'id' => Schema::TYPE_PK,
-            'code' => Schema::TYPE_STRING,
-            'type' => Schema::TYPE_SMALLINT,
+            'code' => Schema::TYPE_STRING . ' NOT NULL',
+            'name' => Schema::TYPE_STRING . ' NOT NULL',
+            'description' => Schema::TYPE_TEXT,
+            'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
             'value' => Schema::TYPE_BINARY
         ];
     }

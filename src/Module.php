@@ -10,6 +10,7 @@
 namespace jlorente\config;
 
 use yii\base\Module as BaseModule;
+use Yii;
 
 /**
  * Module class for the configuration variable module.
@@ -17,6 +18,12 @@ use yii\base\Module as BaseModule;
  * @author José Lorente <jose.lorente.martin@gmail.com>
  */
 class Module extends BaseModule {
+
+    /**
+     *
+     * @var string 
+     */
+    public $messageConfig = [];
 
     /**
      * @inheritdoc
@@ -32,6 +39,16 @@ class Module extends BaseModule {
         $this->setAliases([
             '@jlorenteConfig' => '@vendor/jlorente/yii2-config-variables/src',
         ]);
+
+        Yii::$app->i18n->translations['jlorente/config'] = $this->getMessageConfig();
+    }
+
+    protected function getMessageConfig() {
+        return array_merge([
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => '@jlorenteConfig/messages',
+            'forceTranslation' => true
+                ], $this->messageConfig);
     }
 
 }

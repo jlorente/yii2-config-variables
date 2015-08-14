@@ -6,9 +6,10 @@
  * @copyright   José Lorente
  * @version     1.0
  */
-use yii\web\View;
-
-/* @var $model jlorente\config\models\Variable */
+/* @var $model jlorente\config\models\VariableForm */
 /* @var $this yii\web\View */
+/* @var $form yii\widgets\ActiveForm */
 
-echo View::render('_form', ['model' => $model]);
+echo $form->field($model, 'value')->input('number', [
+    'pattern' => '[0-9]+'
+]);
