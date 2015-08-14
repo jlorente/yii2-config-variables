@@ -6,9 +6,6 @@
  * @copyright   José Lorente
  * @version     1.0
  */
-
-namespace jlorente\config\migrations;
-
 use yii\db\Schema;
 use custom\db\Migration;
 use jlorente\config\models\Variable;
