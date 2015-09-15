@@ -13,6 +13,7 @@ use yii\web\Controller;
 use jlorente\config\models\Variable;
 use Yii;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 
 /**
  * Controller to handle the requests of the crud operations of the Variable 
@@ -21,6 +22,25 @@ use yii\web\NotFoundHttpException;
  * @author José Lorente <jose.lorente.martin@gmail.com>
  */
 class VariableController extends Controller {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                ],
+            ]
+        ];
+    }
 
     /**
      * Renders the create form and create a Variable model.
