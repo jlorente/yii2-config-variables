@@ -77,7 +77,10 @@ class Variable extends ActiveRecord {
             'name' => Yii::t('jlorente/config', 'Name'),
             'description' => Yii::t('jlorente/config', 'Description'),
             'type' => Yii::t('jlorente/config', 'Type'),
-            'value' => Yii::t('jlorente/config', 'Value')
+            'value' => Yii::t('jlorente/config', 'Value'),
+            'created_at' => Yii::t('jlorente/config', 'Created At'),
+            'updated_at' => Yii::t('jlorente/config', 'Updated At'),
+            'updated_by' => Yii::t('jlorente/config', 'Updated By')
         ];
     }
 

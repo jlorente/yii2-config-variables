@@ -55,6 +55,9 @@ $this->title = Yii::t('jlorente/config', 'Config Variables')
                     return $v;
                 },
             ],
+            'created_at:datetime',
+            'updated_at:datetime',
+            'updated_by',
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {update}'

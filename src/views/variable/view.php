@@ -48,7 +48,10 @@ echo DetailView::widget([
             'attribute' => 'value',
             'format' => 'raw',
             'value' => $valueFunc($model)
-        ]
+        ],
+        'created_at:datetime',
+        'updated_at:datetime',
+        'updated_by'
     ]
 ]);
 ?>

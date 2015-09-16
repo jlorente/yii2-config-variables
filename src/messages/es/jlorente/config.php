@@ -6,7 +6,6 @@
  * @copyright   José Lorente
  * @version     1.0
  */
-
 return [
     'ID' => 'Id',
     'Code' => 'Código',
@@ -20,5 +19,8 @@ return [
     'Config Variables' => 'Variables de configuración',
     'Return' => 'Volver',
     'Return to list' => 'Volver al listado',
-    'Update' => 'Modificar'
+    'Update' => 'Modificar',
+    'Created At' => 'Fecha de creación',
+    'Updated At' => 'Fecha de modificación',
+    'Updated By' => 'Modificador'
 ];
