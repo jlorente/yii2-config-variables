@@ -8,6 +8,17 @@ The Module includes the controller and views with the basic CRUD operations to
 include in your backend application, allowing you to modify the values of the 
 configuration params directly in the production environment.
 
+## Introduction
+
+Configuration variables are used in the application in order to store application 
+configuration parameters. The motivation of this package is to avoid the use of 
+of ``` Yii::$app->params ``` array because every time you want to change the 
+value of some of these params, you must do it writting the params.php file and 
+doing a production deployment. 
+
+With this plugin, you would be allowed to modify the configuration params of your 
+application in your backend area without production deployments.
+
 ## Installation
 
 To install, either run
@@ -33,15 +44,6 @@ $ ./yii migrate --migrationPath=@vendor/jlorente/yii2-config-variables/src/migra
 The last command will create the table needed to handle the config variables.
 
 ## Usage
-
-Configuration variables are used in the application in order to store application 
-configuration parameters. The motivation of this package is to avoid the use of 
-of ```php Yii::$app->params ``` array because every time you want to change the 
-value of some of these params, you must do it by rewritting the params.php file 
-and doing a production deployment. 
-
-With this plugin, you would be allowed to modify the configuration params of your 
-application without production deployments.
 
 ### Creating Variables
 
@@ -172,7 +174,6 @@ Following the previous example, if I want to check the values of my
     echo $value->postsValoration;
     echo $value->commentsNumber;
 ```
-
 
 ## Further considerations
 
