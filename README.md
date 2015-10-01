@@ -8,6 +8,17 @@ The Module includes the controller and views with the basic CRUD operations to
 include in your backend application, allowing you to modify the values of the 
 configuration params directly in the production environment.
 
+## Introduction
+
+Configuration variables are used in the application in order to store application 
+configuration parameters. The motivation of this package is to avoid the use of 
+of ``` Yii::$app->params ``` array because every time you want to change the 
+value of some of these params, you must do it writting the params.php file and 
+doing a production deployment. 
+
+With this plugin, you would be allowed to modify the configuration params of your 
+application in your backend area without production deployments.
+
 ## Installation
 
 To install, either run
@@ -34,16 +45,7 @@ The last command will create the table needed to handle the config variables.
 
 ## Usage
 
-Configuration variables are used in the application in order to store application 
-configuration parameters. The motivation of this package is to avoid the use of 
-of ```php Yii::$app->params ``` array because every time you want to change the 
-value of some of these params, you must do it by rewritting the params.php file 
-and doing a production deployment. 
-
-With this plugin, you would be allowed to modify the configuration params of your 
-application without production deployments.
-
-### Creating Variables
+#### Creating Variables
 
 Configuration variables are used as part of the code to check its values at 
 runtime, so should exist in order to be used and that is why they can't be 
@@ -101,7 +103,7 @@ class mXXXXXX_XXXXXX_a_type_object_variable_creation extends Migration {
 }
 ```
 
-### Listing, viewing and updating Variables values.
+#### Listing, viewing and updating Variables values.
 
 The extension comes along with a module to be set in your backend area in order 
 to have the basic user interface operations for the Variable model. This module 
@@ -151,7 +153,7 @@ jlorente/config.php
     ]
 ```
 
-### Using the Variables in the code
+#### Using the Variables in the code
 
 The Variable model is the one that should be used to check the values of your 
 configuration params. In order to do that use the static method value.
@@ -167,12 +169,11 @@ Following the previous example, if I want to check the values of my
 'CODE-OF-MY-TYPE_OBJECT-VARIABLE' variable I should do.
 
 ```php
-    $value = Variable::value('CODE-OF-MY-CONFIGURATION-VARIABLE');
+    $value = Variable::value('CODE-OF-MY-TYPE_OBJECT-VARIABLE');
     echo $value->postsNumber;
     echo $value->postsValoration;
     echo $value->commentsNumber;
 ```
-
 
 ## Further considerations
 
