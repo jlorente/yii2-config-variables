@@ -169,7 +169,7 @@ Following the previous example, if I want to check the values of my
 'CODE-OF-MY-TYPE_OBJECT-VARIABLE' variable I should do.
 
 ```php
-    $value = Variable::value('CODE-OF-MY-CONFIGURATION-VARIABLE');
+    $value = Variable::value('CODE-OF-MY-TYPE_OBJECT-VARIABLE');
     echo $value->postsNumber;
     echo $value->postsValoration;
     echo $value->commentsNumber;
