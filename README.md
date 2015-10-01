@@ -43,6 +43,9 @@ $ ./yii migrate --migrationPath=@vendor/jlorente/yii2-config-variables/src/migra
 ```
 The last command will create the table needed to handle the config variables.
 
+*IMPORTANT!:* If you downloaded the prerelease (<1.0.0) you should run the migration 
+again.
+
 ## Usage
 
 #### Creating Variables
