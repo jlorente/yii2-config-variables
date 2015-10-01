@@ -50,7 +50,7 @@ class Variable extends ActiveRecord {
      * @inheritdoc
      */
     public static function tableName() {
-        return 'cnf_variable';
+        return 'jl_cnf_variable';
     }
 
     /**
@@ -84,6 +84,9 @@ class Variable extends ActiveRecord {
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors() {
         return array_merge(parent::behaviors(), [
             TimestampBehavior::className(),
