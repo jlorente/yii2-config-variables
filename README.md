@@ -1,5 +1,5 @@
-Yii2 Config Variables (In development)
-======================================
+Yii2 Config Variables
+=====================
 
 A Yii2 Module to handle application configuration via database. Allows to modify 
 variables content without tedious production deployments. 
@@ -136,8 +136,7 @@ your backend navbar to make it accessible.
 
 The module comes with english and spanish translations. If you want to include 
 your own translations, you can do this by providing the "messageConfig" property 
-in the module configuration. All the module translations are stored in the file 
-jlorente/config.php
+in the module configuration:
 
 ./your-app/config/main.php
 ```php
@@ -149,6 +148,23 @@ jlorente/config.php
             "messageConfig" => [
                 "basePath" => "PATH-TO-MY-TRANSLATION",
             ]
+        ]
+    ]
+```
+
+Remember that all the module translations are stored in the file jlorente/config.php
+
+You can also use your own layout for the module views by setting the path in the 
+layout property in the module configuration:
+
+./your-app/config/main.php
+```php
+    // ... other configurations ...
+    "modules" => [
+        // ... other modules ...
+        "config" => [
+            "class" => "jlorente\config\Module",
+            "layout" => "PATH-TO-MY-LAYOUT"
         ]
     ]
 ```
