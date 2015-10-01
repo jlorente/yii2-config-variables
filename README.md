@@ -45,7 +45,7 @@ The last command will create the table needed to handle the config variables.
 
 ## Usage
 
-### Creating Variables
+#### Creating Variables
 
 Configuration variables are used as part of the code to check its values at 
 runtime, so should exist in order to be used and that is why they can't be 
@@ -103,7 +103,7 @@ class mXXXXXX_XXXXXX_a_type_object_variable_creation extends Migration {
 }
 ```
 
-### Listing, viewing and updating Variables values.
+#### Listing, viewing and updating Variables values.
 
 The extension comes along with a module to be set in your backend area in order 
 to have the basic user interface operations for the Variable model. This module 
@@ -153,7 +153,7 @@ jlorente/config.php
     ]
 ```
 
-### Using the Variables in the code
+#### Using the Variables in the code
 
 The Variable model is the one that should be used to check the values of your 
 configuration params. In order to do that use the static method value.
