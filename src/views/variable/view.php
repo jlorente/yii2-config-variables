@@ -13,6 +13,7 @@ use yii\helpers\Html;
 /* @var $model jlorente\config\models\VariableForm */
 /* @var $this yii\web\View */
 
+$this->title = Yii::t('jlorente/config', 'Variable') . ' #' . $model->id;
 $types = Variable::getTypes();
 $valueFunc = function($model) {
     switch ($model->type) {
@@ -33,37 +34,41 @@ $valueFunc = function($model) {
     }
     return $v;
 };
-echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'id',
-        'code',
-        'name',
-        'description',
-        [
-            'attribute' => 'type',
-            'value' => $types[$model->type]
-        ],
-        [
-            'attribute' => 'value',
-            'format' => 'raw',
-            'value' => $valueFunc($model)
-        ],
-        'created_at:datetime',
-        'updated_at:datetime',
-        'updated_by'
-    ]
-]);
 ?>
-<div class="col-xs-12 buttons">
-    <?=
-    Html::a(
-            Yii::t('jlorente/config', 'Return to list'), ['index'], ['class' => 'btn btn-success']
-    )
+<div class="backend-container variable-model variable-view clearfix">
+    <?php
+    echo DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'code',
+            'name',
+            'description',
+            [
+                'attribute' => 'type',
+                'value' => $types[$model->type]
+            ],
+            [
+                'attribute' => 'value',
+                'format' => 'raw',
+                'value' => $valueFunc($model)
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
+            'updated_by'
+        ]
+    ]);
     ?>
-    <?=
-    Html::a(
-            Yii::t('jlorente/config', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']
-    )
-    ?>
+    <div class="col-xs-12 buttons">
+        <?=
+        Html::a(
+                Yii::t('jlorente/config', 'Return to list'), ['index'], ['class' => 'btn btn-success']
+        )
+        ?>
+        <?=
+        Html::a(
+                Yii::t('jlorente/config', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']
+        )
+        ?>
+    </div>
 </div>
