@@ -22,5 +22,7 @@ return [
     'Update' => 'Modificar',
     'Created At' => 'Fecha de creación',
     'Updated At' => 'Fecha de modificación',
-    'Updated By' => 'Modificador'
+    'Updated By' => 'Modificador',
+    'Update Variable' => 'Modificar Variable',
+    'Variable' => 'Variable'
 ];

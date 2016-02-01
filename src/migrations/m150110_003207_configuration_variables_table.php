@@ -11,16 +11,41 @@ use yii\db\Migration;
 use jlorente\config\models\Variable;
 
 /**
- * Configuration variables table creation.
+ * Configuration variables table creation. If you downloaded a prerelease 
+ * package you should run also the migration in order to set the definitive 
+ * table name.
+ * 
+ * To apply this migration run:
+ * ```bash
+ * $ ./yii migrate --migrationPath=@vendor/jlorente/yii2-config-variables/src/migrations
+ * ```
  * 
  * @author José Lorente <jose.lorente.martin@gmail.com>
  */
-class m150813_162711_configuration_variables_table extends Migration {
+class m150110_003207_configuration_variables_table extends Migration {
 
     /**
      * @inheritdoc
      */
     public function up() {
+        try {
+            $this->upgradePackage();
+        } catch (Exception $ex) {
+            $this->createPackage();
+        }
+    }
+
+    /**
+     * Table name modification. Only for upgrading from previous versions.
+     */
+    protected function upgradePackage() {
+        $this->renameTable('cnf_variable', $this->getTableName());
+    }
+
+    /**
+     * Table creation.
+     */
+    protected function createPackage() {
         $this->createTable($this->getTableName(), [
             'id' => Schema::TYPE_PK,
             'code' => Schema::TYPE_STRING . ' NOT NULL',
@@ -32,7 +57,6 @@ class m150813_162711_configuration_variables_table extends Migration {
             'updated_at' => Schema::TYPE_INTEGER,
             'updated_by' => Schema::TYPE_INTEGER
         ]);
-
         $this->createIndex('UNIQUE_code', $this->getTableName(), 'code', true);
     }
 

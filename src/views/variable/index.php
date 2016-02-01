@@ -6,19 +6,17 @@
  * @copyright   José Lorente
  * @version     1.0
  */
-use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use yii\data\ActiveDataProvider;
 use jlorente\config\models\Variable;
 
-$this->title = Yii::t('jlorente/config', 'Config Variables')
+$this->title = Yii::t('jlorente/config', 'Config Variables');
 
 /* @var $model jlorente\config\models\Variable */
 /* @var $this yii\web\View */
 ?>
-<div class="box">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="backend-container variable-model variable-index clearfix">
     <?php
     $types = Variable::getTypes();
     echo GridView::widget([

@@ -21,20 +21,13 @@ class VariableFormAsset extends AssetBundle {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@jlorenteConfig/assets';
+    public $sourcePath = '@vendor/jlorente/yii2-config-variables/src/assets';
 
     /**
      * @inheritdoc
      */
     public $js = [
         'js/variable-form.js'
-    ];
-
-    /**
-     * @inheritdoc
-     */
-    public $css = [
-        'css/variable-form.css'
     ];
 
     /**
