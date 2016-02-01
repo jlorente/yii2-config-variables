@@ -17,7 +17,7 @@ $this->title = Yii::t('jlorente/config', 'Config Variables')
 /* @var $model jlorente\config\models\Variable */
 /* @var $this yii\web\View */
 ?>
-<div class="config-var-container">
+<div class="box">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
     $types = Variable::getTypes();
