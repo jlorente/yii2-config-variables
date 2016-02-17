@@ -206,8 +206,17 @@ class Variable extends ActiveRecord {
             throw new InvalidParamException('Configuration not found');
         }
         $c->value = $value;
-        static::$cached[$config] = $value;
-        return $c->save();
+        if($c->save()) {
+            static::$cached[$config] = $value;
+            return true;
+        } else {
+            $firstError = $c->getFirstError('value');
+            if($firstError) {
+                throw new InvalidParamException($firstError);
+            } else {
+                return false;
+            }
+        }
     }
 
     /**
