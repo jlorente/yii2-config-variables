@@ -194,6 +194,12 @@ Following the previous example, if I want to check the values of my
     echo $value->commentsNumber;
 ```
 
+There is a shorthand method for changing value of variable instance.
+
+```php
+    Variable::set('CODE-OF-MY-CONFIGURATION-VARIABLE', 115);
+```
+
 ## Further considerations
 
 Remember to bootstrap the Module if you want to extend the VariableController 
