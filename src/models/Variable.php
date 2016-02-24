@@ -193,6 +193,33 @@ class Variable extends ActiveRecord {
     }
 
     /**
+     * Sets the value of the configuration variable.
+     *
+     * @param string $config
+     * @param mixed $value
+     * @return bool
+     * @throws InvalidParamException
+     */
+    public static function set($config, $value) {
+        $c = static::findOne(['code' => $config]);
+        if ($c === null) {
+            throw new InvalidParamException('Configuration not found');
+        }
+        $c->value = $value;
+        if($c->save()) {
+            static::$cached[$config] = $value;
+            return true;
+        } else {
+            $firstError = $c->getFirstError('value');
+            if($firstError) {
+                throw new InvalidParamException($firstError);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
      * Returns the allowed variable types.
      * 
      * @return array
