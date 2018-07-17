@@ -57,7 +57,7 @@ class m150110_003207_configuration_variables_table extends Migration {
             'updated_at' => Schema::TYPE_INTEGER,
             'updated_by' => Schema::TYPE_INTEGER
         ]);
-        $this->createIndex('UNIQUE_code', $this->getTableName(), 'code', true);
+        $this->createIndex('UNIQUE_JlCnfVariable_Code', $this->getTableName(), 'code', true);
     }
 
     /**

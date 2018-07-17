@@ -17,12 +17,13 @@ use yii\behaviors\TimestampBehavior,
 
 /**
  * Model class for the configuration variable table. Call the static method 
- * Variable::get('YOUR_VARIABLE_CODE') to get values of configuration variables. 
+ * Variable::value('YOUR_VARIABLE_CODE') to get values of configuration variables. 
  * The method caches the values to avoid querying continuously.
  * 
  * @author José Lorente <jose.lorente.martin@gmail.com>
  */
-class Variable extends ActiveRecord {
+class Variable extends ActiveRecord
+{
     /* Variable Types */
 
     const TYPE_INT = 1;
@@ -30,8 +31,7 @@ class Variable extends ActiveRecord {
     const TYPE_STRING = 3;
     const TYPE_BOOLEAN = 4;
     const TYPE_OBJECT = 5;
-
-    //const TYPE_ARRAY = 6;
+    const TYPE_ARRAY = 6;
 
     /**
      * Store for the already loaded variables.
@@ -49,14 +49,16 @@ class Variable extends ActiveRecord {
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'jl_cnf_variable';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['type', 'created_at', 'updated_at', 'updated_by'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
@@ -70,7 +72,8 @@ class Variable extends ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => Yii::t('jlorente/config', 'ID'),
             'code' => Yii::t('jlorente/config', 'Code'),
@@ -87,7 +90,8 @@ class Variable extends ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return array_merge(parent::behaviors(), [
             TimestampBehavior::className(),
             [
@@ -102,7 +106,8 @@ class Variable extends ActiveRecord {
      * 
      * @return boolean
      */
-    public function validateValue() {
+    public function validateValue()
+    {
         $errorMessage = Yii::t('jlorente/config', 'Invalid value for type "{type}"', [
                     'type' => $this->type
         ]);
@@ -138,13 +143,13 @@ class Variable extends ActiveRecord {
                 }
                 $this->value = (object) $this->value;
                 break;
-            /*           case self::TYPE_ARRAY:
-              if (is_array($this->value) === false) {
-              $this->addError('value', $errorMessage);
-              return false;
-              }
-              $this->value = array_values((array) $this->value);
-              break; */
+            case self::TYPE_ARRAY:
+                if (is_array($this->value) === false) {
+                    $this->addError('value', $errorMessage);
+                    return false;
+                }
+                $this->value = array_values((array) $this->value);
+                break;
             default:
                 $this->addError('type', Yii::t('jlorente/config', 'Unrecognized type'));
                 return false;
@@ -155,7 +160,8 @@ class Variable extends ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function save($runValidation = true, $attributeNames = null) {
+    public function save($runValidation = true, $attributeNames = null)
+    {
         if ($runValidation && !$this->validate($attributeNames)) {
             return false;
         }
@@ -166,7 +172,8 @@ class Variable extends ActiveRecord {
     /**
      * @inheritdoc
      */
-    public static function populateRecord($record, $row) {
+    public static function populateRecord($record, $row)
+    {
         parent::populateRecord($record, $row);
         $record->value = unserialize($record->value);
     }
@@ -178,7 +185,8 @@ class Variable extends ActiveRecord {
      * @return mixed
      * @throws InvalidParamException
      */
-    public static function value($config) {
+    public static function value($config)
+    {
         if (is_string($config) === false) {
             throw new InvalidParamException('$config must be a string');
         }
@@ -193,45 +201,19 @@ class Variable extends ActiveRecord {
     }
 
     /**
-     * Sets the value of the configuration variable.
-     *
-     * @param string $config
-     * @param mixed $value
-     * @return bool
-     * @throws InvalidParamException
-     */
-    public static function set($config, $value) {
-        $c = static::findOne(['code' => $config]);
-        if ($c === null) {
-            throw new InvalidParamException('Configuration not found');
-        }
-        $c->value = $value;
-        if($c->save()) {
-            static::$cached[$config] = $value;
-            return true;
-        } else {
-            $firstError = $c->getFirstError('value');
-            if($firstError) {
-                throw new InvalidParamException($firstError);
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
      * Returns the allowed variable types.
      * 
      * @return array
      */
-    public static function getTypes() {
+    public static function getTypes()
+    {
         return [
             self::TYPE_INT => 'INT',
             self::TYPE_FLOAT => 'FLOAT',
             self::TYPE_STRING => 'STRING',
             self::TYPE_BOOLEAN => 'BOOLEAN',
             self::TYPE_OBJECT => 'OBJECT',
-                //self::TYPE_ARRAY => 'ARRAY'
+            self::TYPE_ARRAY => 'ARRAY'
         ];
     }
 
